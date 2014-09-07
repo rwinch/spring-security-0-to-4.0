@@ -28,7 +28,7 @@ import org.springframework.security.messaging.util.matcher.SimpDestinationMessag
 /**
  * @author Rob Winch
  */
-@Configuration
+//@Configuration
 public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBrokerConfigurer {
 
     @Override
@@ -41,7 +41,7 @@ public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBro
 
     // avoid processing outbound channel
     public void configureClientOutboundChannel(ChannelRegistration registration) {}
-    
+
     private static MessageMatcher<Object>[] message(String... patterns) {
         MessageMatcher<Object>[] result = new MessageMatcher[patterns.length];
         for(int i=0;i<patterns.length;i++) {
@@ -54,16 +54,16 @@ public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBro
 class TypedDestinationMatcher implements MessageMatcher<Object> {
     private SimpMessageType type;
     private MessageMatcher<Object> delegate;
-    
+
     public TypedDestinationMatcher(SimpMessageType type, String pattern) {
         this.type = type;
         this.delegate = new SimpDestinationMessageMatcher(pattern);
     }
-    
+
     @Override
     public boolean matches(Message<? extends Object> message) {
         SimpMessageType actualType = SimpMessageHeaderAccessor.getMessageType(message.getHeaders());
         return actualType == type && this.delegate.matches(message);
     }
-    
+
 }
