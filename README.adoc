@@ -1,0 +1,25 @@
+= About
+
+Source Code From 0 to Spring Security 4.0
+
+= Running with Gradle
+
+1. Ensure you have java installed
+2. cd spring-security-0-to-4.0
+3. Start the application with ./gradlew bootRun or .\gradlew.bat bootRun
+
+Browse to http://localhost:8080/
+
+= Running the sample project in Spring Tool Suite
+
+The following provides information on setting up a development environment that can run the sample in http://www.springsource.org/sts[Spring Tool Suite 3.6.0+]. Other IDE's should work using Gradle's IDE support, but have not been tested.
+
+* IDE Setup
+  * Install Spring Tool Suite 3.6.0+
+  * You will need the following plugins installed (can be found on the Extensions Page)
+    * Gradle Eclipse
+* Importing the project into Spring Tool Suite
+  * File->Import...->Gradle Project
+* Right click the sample.Application class and select Run As->Java Application
+
+The sample will be available at http://localhost:8080/

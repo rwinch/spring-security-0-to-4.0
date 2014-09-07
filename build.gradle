@@ -1,0 +1,68 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.4.RELEASE")
+	}
+}
+
+apply plugin: 'spring-boot'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+group = 'samples'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext.springSecurityVersion = '4.0.0.M2'
+ext.springVersion = '4.1.0.RELEASE'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/libs-snapshot' }
+	maven { url 'http://clojars.org/repo' }
+}
+
+configurations.all {
+	resolutionStrategy {
+		eachDependency { DependencyResolveDetails details ->
+			if (details.requested.group == 'org.springframework') {
+				details.useVersion springVersion
+			}
+			if (details.requested.group.startsWith('org.apache.tomcat')) {
+				details.useVersion '8.0.12'
+			}
+		}
+	}
+}
+
+
+dependencies {
+	compile "org.springframework.boot:spring-boot-starter-web",
+			"org.springframework.boot:spring-boot-starter-data-jpa",
+			"org.springframework.boot:spring-boot-starter-thymeleaf",
+			"org.springframework.boot:spring-boot-starter-websocket",
+			"org.springframework:spring-websocket:${springVersion}",
+			"org.springframework.session:spring-session:1.0.0.BUILD-SNAPSHOT",
+			"org.springframework.data:spring-data-redis:1.3.0.RELEASE",
+			"redis.clients:jedis:2.4.2",
+			"redis.embedded:embedded-redis:0.2",
+			"org.apache.commons:commons-pool2:2.2",
+			"nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect",
+			"com.h2database:h2",
+			"org.springframework.data:spring-data-jpa:1.7.0.M1",
+			"org.springframework.security:spring-security-web:$springSecurityVersion",
+			"org.springframework.security:spring-security-config:$springSecurityVersion",
+			"org.springframework.security:spring-security-messaging:$springSecurityVersion",
+			"org.springframework.security:spring-security-data:$springSecurityVersion"
+			
+
+	testCompile "org.springframework.boot:spring-boot-starter-test",
+			"org.springframework.security:spring-security-test:$springSecurityVersion"
+
+}
